@@ -1,0 +1,21 @@
+# import Profile from './generated/prisma.graphql'
+# import Accredidations from './generated/prisma.graphql'
+# import Organization from './generated/prisma.graphql'
+
+type Query {
+    findProfileById(id: ID!): Profile
+    findOrgById(id: ID!): Organization
+    searchProfiles(searchString: String!): [Profile!]!
+    searchOrgs(searchString: String!): [Organization!]!
+    profiles: [Profile!]!
+    allOrganizations: [Organization!]!
+    
+}
+
+type Mutation {
+    createProfile(first_name: String!, last_name: String!, date_of_birth: String!, occupation: String!): Profile
+    createAccredidation(accreds_name: String!, accreds_desc: String!, accreds_type: String!, date_received: String!, organizationId: ID!): Accredidations
+    createOrganization(org_name: String!, address: String!, country: String!, org_type: String!): Organization
+    setAccredsToProfile(profileId: ID!, accredidationIds: [ID!]!): Profile
+    setEmployerToProfile(profileId: ID!, employerId: ID!): Profile
+}

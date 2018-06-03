@@ -1,0 +1,1215 @@
+# source: http://localhost:4466
+# timestamp: Sun Jun 03 2018 15:56:13 GMT-0400 (Eastern Daylight Time)
+
+type Accredidations implements Node {
+  id: ID!
+  accreds_name: String!
+  accreds_desc: String!
+  accreds_type: String!
+  date_received: String!
+  accreditor_org(where: OrganizationWhereInput): Organization!
+}
+
+"""A connection to a list of items."""
+type AccredidationsConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [AccredidationsEdge]!
+  aggregate: AggregateAccredidations!
+}
+
+input AccredidationsCreateInput {
+  accreds_name: String!
+  accreds_desc: String!
+  accreds_type: String!
+  date_received: String!
+  accreditor_org: OrganizationCreateOneInput!
+}
+
+input AccredidationsCreateManyInput {
+  create: [AccredidationsCreateInput!]
+  connect: [AccredidationsWhereUniqueInput!]
+}
+
+"""An edge in a connection."""
+type AccredidationsEdge {
+  """The item at the end of the edge."""
+  node: Accredidations!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum AccredidationsOrderByInput {
+  id_ASC
+  id_DESC
+  accreds_name_ASC
+  accreds_name_DESC
+  accreds_desc_ASC
+  accreds_desc_DESC
+  accreds_type_ASC
+  accreds_type_DESC
+  date_received_ASC
+  date_received_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type AccredidationsPreviousValues {
+  id: ID!
+  accreds_name: String!
+  accreds_desc: String!
+  accreds_type: String!
+  date_received: String!
+}
+
+type AccredidationsSubscriptionPayload {
+  mutation: MutationType!
+  node: Accredidations
+  updatedFields: [String!]
+  previousValues: AccredidationsPreviousValues
+}
+
+input AccredidationsSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [AccredidationsSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [AccredidationsSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [AccredidationsSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: AccredidationsWhereInput
+}
+
+input AccredidationsUpdateDataInput {
+  accreds_name: String
+  accreds_desc: String
+  accreds_type: String
+  date_received: String
+  accreditor_org: OrganizationUpdateOneInput
+}
+
+input AccredidationsUpdateInput {
+  accreds_name: String
+  accreds_desc: String
+  accreds_type: String
+  date_received: String
+  accreditor_org: OrganizationUpdateOneInput
+}
+
+input AccredidationsUpdateManyInput {
+  create: [AccredidationsCreateInput!]
+  connect: [AccredidationsWhereUniqueInput!]
+  disconnect: [AccredidationsWhereUniqueInput!]
+  delete: [AccredidationsWhereUniqueInput!]
+  update: [AccredidationsUpdateWithWhereUniqueNestedInput!]
+  upsert: [AccredidationsUpsertWithWhereUniqueNestedInput!]
+}
+
+input AccredidationsUpdateWithWhereUniqueNestedInput {
+  where: AccredidationsWhereUniqueInput!
+  data: AccredidationsUpdateDataInput!
+}
+
+input AccredidationsUpsertWithWhereUniqueNestedInput {
+  where: AccredidationsWhereUniqueInput!
+  update: AccredidationsUpdateDataInput!
+  create: AccredidationsCreateInput!
+}
+
+input AccredidationsWhereInput {
+  """Logical AND on all given filters."""
+  AND: [AccredidationsWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [AccredidationsWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [AccredidationsWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  accreds_name: String
+
+  """All values that are not equal to given value."""
+  accreds_name_not: String
+
+  """All values that are contained in given list."""
+  accreds_name_in: [String!]
+
+  """All values that are not contained in given list."""
+  accreds_name_not_in: [String!]
+
+  """All values less than the given value."""
+  accreds_name_lt: String
+
+  """All values less than or equal the given value."""
+  accreds_name_lte: String
+
+  """All values greater than the given value."""
+  accreds_name_gt: String
+
+  """All values greater than or equal the given value."""
+  accreds_name_gte: String
+
+  """All values containing the given string."""
+  accreds_name_contains: String
+
+  """All values not containing the given string."""
+  accreds_name_not_contains: String
+
+  """All values starting with the given string."""
+  accreds_name_starts_with: String
+
+  """All values not starting with the given string."""
+  accreds_name_not_starts_with: String
+
+  """All values ending with the given string."""
+  accreds_name_ends_with: String
+
+  """All values not ending with the given string."""
+  accreds_name_not_ends_with: String
+  accreds_desc: String
+
+  """All values that are not equal to given value."""
+  accreds_desc_not: String
+
+  """All values that are contained in given list."""
+  accreds_desc_in: [String!]
+
+  """All values that are not contained in given list."""
+  accreds_desc_not_in: [String!]
+
+  """All values less than the given value."""
+  accreds_desc_lt: String
+
+  """All values less than or equal the given value."""
+  accreds_desc_lte: String
+
+  """All values greater than the given value."""
+  accreds_desc_gt: String
+
+  """All values greater than or equal the given value."""
+  accreds_desc_gte: String
+
+  """All values containing the given string."""
+  accreds_desc_contains: String
+
+  """All values not containing the given string."""
+  accreds_desc_not_contains: String
+
+  """All values starting with the given string."""
+  accreds_desc_starts_with: String
+
+  """All values not starting with the given string."""
+  accreds_desc_not_starts_with: String
+
+  """All values ending with the given string."""
+  accreds_desc_ends_with: String
+
+  """All values not ending with the given string."""
+  accreds_desc_not_ends_with: String
+  accreds_type: String
+
+  """All values that are not equal to given value."""
+  accreds_type_not: String
+
+  """All values that are contained in given list."""
+  accreds_type_in: [String!]
+
+  """All values that are not contained in given list."""
+  accreds_type_not_in: [String!]
+
+  """All values less than the given value."""
+  accreds_type_lt: String
+
+  """All values less than or equal the given value."""
+  accreds_type_lte: String
+
+  """All values greater than the given value."""
+  accreds_type_gt: String
+
+  """All values greater than or equal the given value."""
+  accreds_type_gte: String
+
+  """All values containing the given string."""
+  accreds_type_contains: String
+
+  """All values not containing the given string."""
+  accreds_type_not_contains: String
+
+  """All values starting with the given string."""
+  accreds_type_starts_with: String
+
+  """All values not starting with the given string."""
+  accreds_type_not_starts_with: String
+
+  """All values ending with the given string."""
+  accreds_type_ends_with: String
+
+  """All values not ending with the given string."""
+  accreds_type_not_ends_with: String
+  date_received: String
+
+  """All values that are not equal to given value."""
+  date_received_not: String
+
+  """All values that are contained in given list."""
+  date_received_in: [String!]
+
+  """All values that are not contained in given list."""
+  date_received_not_in: [String!]
+
+  """All values less than the given value."""
+  date_received_lt: String
+
+  """All values less than or equal the given value."""
+  date_received_lte: String
+
+  """All values greater than the given value."""
+  date_received_gt: String
+
+  """All values greater than or equal the given value."""
+  date_received_gte: String
+
+  """All values containing the given string."""
+  date_received_contains: String
+
+  """All values not containing the given string."""
+  date_received_not_contains: String
+
+  """All values starting with the given string."""
+  date_received_starts_with: String
+
+  """All values not starting with the given string."""
+  date_received_not_starts_with: String
+
+  """All values ending with the given string."""
+  date_received_ends_with: String
+
+  """All values not ending with the given string."""
+  date_received_not_ends_with: String
+  accreditor_org: OrganizationWhereInput
+}
+
+input AccredidationsWhereUniqueInput {
+  id: ID
+}
+
+type AggregateAccredidations {
+  count: Int!
+}
+
+type AggregateOrganization {
+  count: Int!
+}
+
+type AggregateProfile {
+  count: Int!
+}
+
+type BatchPayload {
+  """The number of nodes that have been affected by the Batch operation."""
+  count: Long!
+}
+
+"""
+The `Long` scalar type represents non-fractional signed whole numeric values.
+Long can represent values between -(2^63) and 2^63 - 1.
+"""
+scalar Long
+
+type Mutation {
+  createProfile(data: ProfileCreateInput!): Profile!
+  createOrganization(data: OrganizationCreateInput!): Organization!
+  createAccredidations(data: AccredidationsCreateInput!): Accredidations!
+  updateProfile(data: ProfileUpdateInput!, where: ProfileWhereUniqueInput!): Profile
+  updateOrganization(data: OrganizationUpdateInput!, where: OrganizationWhereUniqueInput!): Organization
+  updateAccredidations(data: AccredidationsUpdateInput!, where: AccredidationsWhereUniqueInput!): Accredidations
+  deleteProfile(where: ProfileWhereUniqueInput!): Profile
+  deleteOrganization(where: OrganizationWhereUniqueInput!): Organization
+  deleteAccredidations(where: AccredidationsWhereUniqueInput!): Accredidations
+  upsertProfile(where: ProfileWhereUniqueInput!, create: ProfileCreateInput!, update: ProfileUpdateInput!): Profile!
+  upsertOrganization(where: OrganizationWhereUniqueInput!, create: OrganizationCreateInput!, update: OrganizationUpdateInput!): Organization!
+  upsertAccredidations(where: AccredidationsWhereUniqueInput!, create: AccredidationsCreateInput!, update: AccredidationsUpdateInput!): Accredidations!
+  updateManyProfiles(data: ProfileUpdateInput!, where: ProfileWhereInput): BatchPayload!
+  updateManyOrganizations(data: OrganizationUpdateInput!, where: OrganizationWhereInput): BatchPayload!
+  updateManyAccredidationses(data: AccredidationsUpdateInput!, where: AccredidationsWhereInput): BatchPayload!
+  deleteManyProfiles(where: ProfileWhereInput): BatchPayload!
+  deleteManyOrganizations(where: OrganizationWhereInput): BatchPayload!
+  deleteManyAccredidationses(where: AccredidationsWhereInput): BatchPayload!
+}
+
+enum MutationType {
+  CREATED
+  UPDATED
+  DELETED
+}
+
+"""An object with an ID"""
+interface Node {
+  """The id of the object."""
+  id: ID!
+}
+
+type Organization implements Node {
+  id: ID!
+  org_name: String!
+  address: String!
+  country: String!
+  org_type: String!
+  domain_id: Int!
+}
+
+"""A connection to a list of items."""
+type OrganizationConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [OrganizationEdge]!
+  aggregate: AggregateOrganization!
+}
+
+input OrganizationCreateInput {
+  org_name: String!
+  address: String!
+  country: String!
+  org_type: String!
+  domain_id: Int!
+}
+
+input OrganizationCreateOneInput {
+  create: OrganizationCreateInput
+  connect: OrganizationWhereUniqueInput
+}
+
+"""An edge in a connection."""
+type OrganizationEdge {
+  """The item at the end of the edge."""
+  node: Organization!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum OrganizationOrderByInput {
+  id_ASC
+  id_DESC
+  org_name_ASC
+  org_name_DESC
+  address_ASC
+  address_DESC
+  country_ASC
+  country_DESC
+  org_type_ASC
+  org_type_DESC
+  domain_id_ASC
+  domain_id_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type OrganizationPreviousValues {
+  id: ID!
+  org_name: String!
+  address: String!
+  country: String!
+  org_type: String!
+  domain_id: Int!
+}
+
+type OrganizationSubscriptionPayload {
+  mutation: MutationType!
+  node: Organization
+  updatedFields: [String!]
+  previousValues: OrganizationPreviousValues
+}
+
+input OrganizationSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [OrganizationSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [OrganizationSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [OrganizationSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: OrganizationWhereInput
+}
+
+input OrganizationUpdateDataInput {
+  org_name: String
+  address: String
+  country: String
+  org_type: String
+  domain_id: Int
+}
+
+input OrganizationUpdateInput {
+  org_name: String
+  address: String
+  country: String
+  org_type: String
+  domain_id: Int
+}
+
+input OrganizationUpdateOneInput {
+  create: OrganizationCreateInput
+  connect: OrganizationWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: OrganizationUpdateDataInput
+  upsert: OrganizationUpsertNestedInput
+}
+
+input OrganizationUpsertNestedInput {
+  update: OrganizationUpdateDataInput!
+  create: OrganizationCreateInput!
+}
+
+input OrganizationWhereInput {
+  """Logical AND on all given filters."""
+  AND: [OrganizationWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [OrganizationWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [OrganizationWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  org_name: String
+
+  """All values that are not equal to given value."""
+  org_name_not: String
+
+  """All values that are contained in given list."""
+  org_name_in: [String!]
+
+  """All values that are not contained in given list."""
+  org_name_not_in: [String!]
+
+  """All values less than the given value."""
+  org_name_lt: String
+
+  """All values less than or equal the given value."""
+  org_name_lte: String
+
+  """All values greater than the given value."""
+  org_name_gt: String
+
+  """All values greater than or equal the given value."""
+  org_name_gte: String
+
+  """All values containing the given string."""
+  org_name_contains: String
+
+  """All values not containing the given string."""
+  org_name_not_contains: String
+
+  """All values starting with the given string."""
+  org_name_starts_with: String
+
+  """All values not starting with the given string."""
+  org_name_not_starts_with: String
+
+  """All values ending with the given string."""
+  org_name_ends_with: String
+
+  """All values not ending with the given string."""
+  org_name_not_ends_with: String
+  address: String
+
+  """All values that are not equal to given value."""
+  address_not: String
+
+  """All values that are contained in given list."""
+  address_in: [String!]
+
+  """All values that are not contained in given list."""
+  address_not_in: [String!]
+
+  """All values less than the given value."""
+  address_lt: String
+
+  """All values less than or equal the given value."""
+  address_lte: String
+
+  """All values greater than the given value."""
+  address_gt: String
+
+  """All values greater than or equal the given value."""
+  address_gte: String
+
+  """All values containing the given string."""
+  address_contains: String
+
+  """All values not containing the given string."""
+  address_not_contains: String
+
+  """All values starting with the given string."""
+  address_starts_with: String
+
+  """All values not starting with the given string."""
+  address_not_starts_with: String
+
+  """All values ending with the given string."""
+  address_ends_with: String
+
+  """All values not ending with the given string."""
+  address_not_ends_with: String
+  country: String
+
+  """All values that are not equal to given value."""
+  country_not: String
+
+  """All values that are contained in given list."""
+  country_in: [String!]
+
+  """All values that are not contained in given list."""
+  country_not_in: [String!]
+
+  """All values less than the given value."""
+  country_lt: String
+
+  """All values less than or equal the given value."""
+  country_lte: String
+
+  """All values greater than the given value."""
+  country_gt: String
+
+  """All values greater than or equal the given value."""
+  country_gte: String
+
+  """All values containing the given string."""
+  country_contains: String
+
+  """All values not containing the given string."""
+  country_not_contains: String
+
+  """All values starting with the given string."""
+  country_starts_with: String
+
+  """All values not starting with the given string."""
+  country_not_starts_with: String
+
+  """All values ending with the given string."""
+  country_ends_with: String
+
+  """All values not ending with the given string."""
+  country_not_ends_with: String
+  org_type: String
+
+  """All values that are not equal to given value."""
+  org_type_not: String
+
+  """All values that are contained in given list."""
+  org_type_in: [String!]
+
+  """All values that are not contained in given list."""
+  org_type_not_in: [String!]
+
+  """All values less than the given value."""
+  org_type_lt: String
+
+  """All values less than or equal the given value."""
+  org_type_lte: String
+
+  """All values greater than the given value."""
+  org_type_gt: String
+
+  """All values greater than or equal the given value."""
+  org_type_gte: String
+
+  """All values containing the given string."""
+  org_type_contains: String
+
+  """All values not containing the given string."""
+  org_type_not_contains: String
+
+  """All values starting with the given string."""
+  org_type_starts_with: String
+
+  """All values not starting with the given string."""
+  org_type_not_starts_with: String
+
+  """All values ending with the given string."""
+  org_type_ends_with: String
+
+  """All values not ending with the given string."""
+  org_type_not_ends_with: String
+  domain_id: Int
+
+  """All values that are not equal to given value."""
+  domain_id_not: Int
+
+  """All values that are contained in given list."""
+  domain_id_in: [Int!]
+
+  """All values that are not contained in given list."""
+  domain_id_not_in: [Int!]
+
+  """All values less than the given value."""
+  domain_id_lt: Int
+
+  """All values less than or equal the given value."""
+  domain_id_lte: Int
+
+  """All values greater than the given value."""
+  domain_id_gt: Int
+
+  """All values greater than or equal the given value."""
+  domain_id_gte: Int
+}
+
+input OrganizationWhereUniqueInput {
+  id: ID
+}
+
+"""Information about pagination in a connection."""
+type PageInfo {
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+}
+
+type Profile implements Node {
+  id: ID!
+  first_name: String!
+  last_name: String!
+  date_of_birth: String!
+  stories_published: Int
+  stories_reviewed: Int
+  occupation: String!
+  employer(where: OrganizationWhereInput): Organization
+  accredidations(where: AccredidationsWhereInput, orderBy: AccredidationsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Accredidations!]
+}
+
+"""A connection to a list of items."""
+type ProfileConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [ProfileEdge]!
+  aggregate: AggregateProfile!
+}
+
+input ProfileCreateInput {
+  first_name: String!
+  last_name: String!
+  date_of_birth: String!
+  stories_published: Int
+  stories_reviewed: Int
+  occupation: String!
+  employer: OrganizationCreateOneInput
+  accredidations: AccredidationsCreateManyInput
+}
+
+"""An edge in a connection."""
+type ProfileEdge {
+  """The item at the end of the edge."""
+  node: Profile!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum ProfileOrderByInput {
+  id_ASC
+  id_DESC
+  first_name_ASC
+  first_name_DESC
+  last_name_ASC
+  last_name_DESC
+  date_of_birth_ASC
+  date_of_birth_DESC
+  stories_published_ASC
+  stories_published_DESC
+  stories_reviewed_ASC
+  stories_reviewed_DESC
+  occupation_ASC
+  occupation_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type ProfilePreviousValues {
+  id: ID!
+  first_name: String!
+  last_name: String!
+  date_of_birth: String!
+  stories_published: Int
+  stories_reviewed: Int
+  occupation: String!
+}
+
+type ProfileSubscriptionPayload {
+  mutation: MutationType!
+  node: Profile
+  updatedFields: [String!]
+  previousValues: ProfilePreviousValues
+}
+
+input ProfileSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ProfileSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ProfileSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ProfileSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: ProfileWhereInput
+}
+
+input ProfileUpdateInput {
+  first_name: String
+  last_name: String
+  date_of_birth: String
+  stories_published: Int
+  stories_reviewed: Int
+  occupation: String
+  employer: OrganizationUpdateOneInput
+  accredidations: AccredidationsUpdateManyInput
+}
+
+input ProfileWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ProfileWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ProfileWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ProfileWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  first_name: String
+
+  """All values that are not equal to given value."""
+  first_name_not: String
+
+  """All values that are contained in given list."""
+  first_name_in: [String!]
+
+  """All values that are not contained in given list."""
+  first_name_not_in: [String!]
+
+  """All values less than the given value."""
+  first_name_lt: String
+
+  """All values less than or equal the given value."""
+  first_name_lte: String
+
+  """All values greater than the given value."""
+  first_name_gt: String
+
+  """All values greater than or equal the given value."""
+  first_name_gte: String
+
+  """All values containing the given string."""
+  first_name_contains: String
+
+  """All values not containing the given string."""
+  first_name_not_contains: String
+
+  """All values starting with the given string."""
+  first_name_starts_with: String
+
+  """All values not starting with the given string."""
+  first_name_not_starts_with: String
+
+  """All values ending with the given string."""
+  first_name_ends_with: String
+
+  """All values not ending with the given string."""
+  first_name_not_ends_with: String
+  last_name: String
+
+  """All values that are not equal to given value."""
+  last_name_not: String
+
+  """All values that are contained in given list."""
+  last_name_in: [String!]
+
+  """All values that are not contained in given list."""
+  last_name_not_in: [String!]
+
+  """All values less than the given value."""
+  last_name_lt: String
+
+  """All values less than or equal the given value."""
+  last_name_lte: String
+
+  """All values greater than the given value."""
+  last_name_gt: String
+
+  """All values greater than or equal the given value."""
+  last_name_gte: String
+
+  """All values containing the given string."""
+  last_name_contains: String
+
+  """All values not containing the given string."""
+  last_name_not_contains: String
+
+  """All values starting with the given string."""
+  last_name_starts_with: String
+
+  """All values not starting with the given string."""
+  last_name_not_starts_with: String
+
+  """All values ending with the given string."""
+  last_name_ends_with: String
+
+  """All values not ending with the given string."""
+  last_name_not_ends_with: String
+  date_of_birth: String
+
+  """All values that are not equal to given value."""
+  date_of_birth_not: String
+
+  """All values that are contained in given list."""
+  date_of_birth_in: [String!]
+
+  """All values that are not contained in given list."""
+  date_of_birth_not_in: [String!]
+
+  """All values less than the given value."""
+  date_of_birth_lt: String
+
+  """All values less than or equal the given value."""
+  date_of_birth_lte: String
+
+  """All values greater than the given value."""
+  date_of_birth_gt: String
+
+  """All values greater than or equal the given value."""
+  date_of_birth_gte: String
+
+  """All values containing the given string."""
+  date_of_birth_contains: String
+
+  """All values not containing the given string."""
+  date_of_birth_not_contains: String
+
+  """All values starting with the given string."""
+  date_of_birth_starts_with: String
+
+  """All values not starting with the given string."""
+  date_of_birth_not_starts_with: String
+
+  """All values ending with the given string."""
+  date_of_birth_ends_with: String
+
+  """All values not ending with the given string."""
+  date_of_birth_not_ends_with: String
+  stories_published: Int
+
+  """All values that are not equal to given value."""
+  stories_published_not: Int
+
+  """All values that are contained in given list."""
+  stories_published_in: [Int!]
+
+  """All values that are not contained in given list."""
+  stories_published_not_in: [Int!]
+
+  """All values less than the given value."""
+  stories_published_lt: Int
+
+  """All values less than or equal the given value."""
+  stories_published_lte: Int
+
+  """All values greater than the given value."""
+  stories_published_gt: Int
+
+  """All values greater than or equal the given value."""
+  stories_published_gte: Int
+  stories_reviewed: Int
+
+  """All values that are not equal to given value."""
+  stories_reviewed_not: Int
+
+  """All values that are contained in given list."""
+  stories_reviewed_in: [Int!]
+
+  """All values that are not contained in given list."""
+  stories_reviewed_not_in: [Int!]
+
+  """All values less than the given value."""
+  stories_reviewed_lt: Int
+
+  """All values less than or equal the given value."""
+  stories_reviewed_lte: Int
+
+  """All values greater than the given value."""
+  stories_reviewed_gt: Int
+
+  """All values greater than or equal the given value."""
+  stories_reviewed_gte: Int
+  occupation: String
+
+  """All values that are not equal to given value."""
+  occupation_not: String
+
+  """All values that are contained in given list."""
+  occupation_in: [String!]
+
+  """All values that are not contained in given list."""
+  occupation_not_in: [String!]
+
+  """All values less than the given value."""
+  occupation_lt: String
+
+  """All values less than or equal the given value."""
+  occupation_lte: String
+
+  """All values greater than the given value."""
+  occupation_gt: String
+
+  """All values greater than or equal the given value."""
+  occupation_gte: String
+
+  """All values containing the given string."""
+  occupation_contains: String
+
+  """All values not containing the given string."""
+  occupation_not_contains: String
+
+  """All values starting with the given string."""
+  occupation_starts_with: String
+
+  """All values not starting with the given string."""
+  occupation_not_starts_with: String
+
+  """All values ending with the given string."""
+  occupation_ends_with: String
+
+  """All values not ending with the given string."""
+  occupation_not_ends_with: String
+  employer: OrganizationWhereInput
+  accredidations_every: AccredidationsWhereInput
+  accredidations_some: AccredidationsWhereInput
+  accredidations_none: AccredidationsWhereInput
+}
+
+input ProfileWhereUniqueInput {
+  id: ID
+}
+
+type Query {
+  profiles(where: ProfileWhereInput, orderBy: ProfileOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Profile]!
+  organizations(where: OrganizationWhereInput, orderBy: OrganizationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Organization]!
+  accredidationses(where: AccredidationsWhereInput, orderBy: AccredidationsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Accredidations]!
+  profile(where: ProfileWhereUniqueInput!): Profile
+  organization(where: OrganizationWhereUniqueInput!): Organization
+  accredidations(where: AccredidationsWhereUniqueInput!): Accredidations
+  profilesConnection(where: ProfileWhereInput, orderBy: ProfileOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ProfileConnection!
+  organizationsConnection(where: OrganizationWhereInput, orderBy: OrganizationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): OrganizationConnection!
+  accredidationsesConnection(where: AccredidationsWhereInput, orderBy: AccredidationsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AccredidationsConnection!
+
+  """Fetches an object given its ID"""
+  node(
+    """The ID of an object"""
+    id: ID!
+  ): Node
+}
+
+type Subscription {
+  profile(where: ProfileSubscriptionWhereInput): ProfileSubscriptionPayload
+  organization(where: OrganizationSubscriptionWhereInput): OrganizationSubscriptionPayload
+  accredidations(where: AccredidationsSubscriptionWhereInput): AccredidationsSubscriptionPayload
+}

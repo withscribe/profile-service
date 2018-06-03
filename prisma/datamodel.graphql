@@ -1,0 +1,29 @@
+type Profile {
+  id: ID! @unique
+  first_name: String!
+  last_name: String!
+  date_of_birth: String!
+  stories_published: Int
+  stories_reviewed: Int
+  occupation: String!
+  employer: Organization
+  accredidations: [Accredidations!]!
+}
+
+type Organization {
+  id: ID! @unique
+  org_name: String!
+  address: String!
+  country: String!
+  org_type: String!
+  domain_id: Int!
+}
+
+type Accredidations {
+  id: ID! @unique
+  accreds_name: String!
+  accreds_desc: String!
+  accreds_type: String!
+  date_received: String!
+  accreditor_org: Organization!
+}
