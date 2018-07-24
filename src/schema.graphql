@@ -4,6 +4,7 @@
 
 type Query {
     findProfileById(id: ID!): Profile
+    findProfileByUserId(user_id: ID!): Profile
     findOrgById(id: ID!): Organization
     searchProfiles(searchString: String!): [Profile!]!
     searchOrgs(searchString: String!): [Organization!]!
@@ -13,7 +14,7 @@ type Query {
 }
 
 type Mutation {
-    createProfile(first_name: String!, last_name: String!, date_of_birth: String!, occupation: String!): Profile
+    createProfile(user_id: ID, first_name: String!, last_name: String!, date_of_birth: String!, occupation: String!): Profile
     createAccredidation(accreds_name: String!, accreds_desc: String!, accreds_type: String!, date_received: String!, organizationId: ID!): Accredidations
     createOrganization(org_name: String!, address: String!, country: String!, org_type: String!): Organization
     setAccredsToProfile(profileId: ID!, accredidationIds: [ID!]!): Profile

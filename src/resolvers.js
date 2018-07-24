@@ -10,6 +10,16 @@ module.exports = {
               info,
           )
         },
+        findProfileByUserId: (_, args, context, info) => {
+            return context.prisma.query.profile(
+                {
+                    where: {
+                        user_id: args.user_id
+                    },
+                },
+                info,
+            )
+        },
         findOrgById: (_, args, context, info) => {
             return context.prisma.query.organization(
                 {
@@ -65,6 +75,7 @@ module.exports = {
             return context.prisma.mutation.createProfile(
                 {
                     data: {
+                        user_id: args.user_id,
                         first_name: args.first_name,
                         last_name: args.last_name,
                         date_of_birth: args.date_of_birth,

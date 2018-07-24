@@ -1,5 +1,6 @@
 type Profile {
   id: ID! @unique
+  user_id: ID @unique
   first_name: String!
   last_name: String!
   date_of_birth: String!

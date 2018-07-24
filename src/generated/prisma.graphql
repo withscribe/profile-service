@@ -1,5 +1,5 @@
 # source: http://localhost:4466
-# timestamp: Sun Jun 03 2018 15:56:13 GMT-0400 (Eastern Daylight Time)
+# timestamp: Thu Jul 19 2018 10:13:36 GMT-0400 (Eastern Daylight Time)
 
 type Accredidations implements Node {
   id: ID!
@@ -806,6 +806,7 @@ type PageInfo {
 
 type Profile implements Node {
   id: ID!
+  user_id: ID
   first_name: String!
   last_name: String!
   date_of_birth: String!
@@ -827,6 +828,7 @@ type ProfileConnection {
 }
 
 input ProfileCreateInput {
+  user_id: ID
   first_name: String!
   last_name: String!
   date_of_birth: String!
@@ -849,6 +851,8 @@ type ProfileEdge {
 enum ProfileOrderByInput {
   id_ASC
   id_DESC
+  user_id_ASC
+  user_id_DESC
   first_name_ASC
   first_name_DESC
   last_name_ASC
@@ -869,6 +873,7 @@ enum ProfileOrderByInput {
 
 type ProfilePreviousValues {
   id: ID!
+  user_id: ID
   first_name: String!
   last_name: String!
   date_of_birth: String!
@@ -917,6 +922,7 @@ input ProfileSubscriptionWhereInput {
 }
 
 input ProfileUpdateInput {
+  user_id: ID
   first_name: String
   last_name: String
   date_of_birth: String
@@ -976,6 +982,46 @@ input ProfileWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
+  user_id: ID
+
+  """All values that are not equal to given value."""
+  user_id_not: ID
+
+  """All values that are contained in given list."""
+  user_id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  user_id_not_in: [ID!]
+
+  """All values less than the given value."""
+  user_id_lt: ID
+
+  """All values less than or equal the given value."""
+  user_id_lte: ID
+
+  """All values greater than the given value."""
+  user_id_gt: ID
+
+  """All values greater than or equal the given value."""
+  user_id_gte: ID
+
+  """All values containing the given string."""
+  user_id_contains: ID
+
+  """All values not containing the given string."""
+  user_id_not_contains: ID
+
+  """All values starting with the given string."""
+  user_id_starts_with: ID
+
+  """All values not starting with the given string."""
+  user_id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  user_id_ends_with: ID
+
+  """All values not ending with the given string."""
+  user_id_not_ends_with: ID
   first_name: String
 
   """All values that are not equal to given value."""
@@ -1188,6 +1234,7 @@ input ProfileWhereInput {
 
 input ProfileWhereUniqueInput {
   id: ID
+  user_id: ID
 }
 
 type Query {
