@@ -9,6 +9,7 @@ type Profile {
   occupation: String!
   employer: Organization
   accredidations: [Accredidations!]!
+  stories: [ID!]!
 }
 
 type Organization {

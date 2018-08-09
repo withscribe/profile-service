@@ -150,6 +150,22 @@ module.exports = {
                     }
                 }
             )
+        },
+        addStoriesToProfile: (_, args, context, info) => {
+            return context.prisma.mutation.updateProfile(
+                {
+                    where: {
+                        id: args.profileId
+                    },
+                    data: {
+                        stories: {
+                            connect: {
+                                id: args.storyIds
+                            }
+                        }
+                    }
+                }
+            )
         }
     }
 }
