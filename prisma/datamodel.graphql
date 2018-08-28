@@ -1,31 +1,32 @@
 type Profile {
   id: ID! @unique
-  user_id: ID @unique
-  first_name: String!
-  last_name: String!
-  date_of_birth: String!
-  stories_published: Int
-  stories_reviewed: Int
-  occupation: String!
+  account_id: ID @unique
+  userName: String @unique
+  firstName: String
+  lastName: String
+  dateOfBirth: String
+  storiesPublished: Int @default(value: 0)
+  storiesReviewed: Int @default(value: 0)
+  flaggedStories: Int @default(value: 0)
+  occupation: String @default(value: "N/A")
   employer: Organization
-  accredidations: [Accredidations!]!
+  accredidations: [Accredidation!]!
   stories: [ID!]!
 }
 
 type Organization {
   id: ID! @unique
-  org_name: String!
+  orgName: String!
   address: String!
   country: String!
-  org_type: String!
-  domain_id: Int!
+  orgType: String!
 }
 
-type Accredidations {
+type Accredidation {
   id: ID! @unique
-  accreds_name: String!
-  accreds_desc: String!
-  accreds_type: String!
-  date_received: String!
-  accreditor_org: Organization!
+  accredsName: String!
+  accredsDesc: String!
+  accredsType: String!
+  dateReceived: String!
+  accreditorOrg: Organization!
 }

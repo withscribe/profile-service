@@ -1,6 +1,13 @@
 const { GraphQLServer } = require('graphql-yoga')
 const { Prisma } = require('prisma-binding')
-const resolvers = require('./resolvers')
+
+const Query = require('./resolvers/query')
+const Mutation = require('./resolvers/mutation')
+
+const resolvers = {
+    Query,
+    Mutation,
+}
 
 const server = new GraphQLServer({
   typeDefs: 'src/schema.graphql',
