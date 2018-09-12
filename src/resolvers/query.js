@@ -25,6 +25,7 @@ function profileByAccountId(_, args, context, info) {
 }
 function profileByUsername(_, args, context, info) {
     const payload = getAccountId(context);
+    console.log(payload)
     return context.prisma.query.profile(
         {
             where: {
@@ -125,6 +126,18 @@ function allAccreds(_, args, context, info) {
     )
 }
 
+function userNameExists(_, args, context, info) {
+    return context.prisma.query.profile(
+        {
+            where:  {
+                userName: args.userName
+            }
+        }, 
+        info
+    )
+}
+
+
 module.exports = {
     searchProfiles,
     searchAccreds,
@@ -136,5 +149,6 @@ module.exports = {
     searchOrganizations,
     orgById,
     allAccreds,
-    accredById
+    accredById,
+    userNameExists
 }
