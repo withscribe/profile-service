@@ -54,12 +54,20 @@ function registerProfile(_, args, context, info) {
         }
     )
 }
-function updateProfileCreate(_, args, context, info) {
+async function updateProfileCreate(_, args, context, info) {
     const payload = getAccountId(context);
-    return context.prisma.mutation.updateProfile(
+
+    const profile = await context.prisma.query.profile(
         {
             where: {
                 account_id: payload.accountId
+            }
+        }
+    )
+    const result = await context.prisma.mutation.updateProfile(
+        {
+            where: {
+                id: profile.id
             },
             data: {
                 userName: args.userName,
@@ -67,14 +75,14 @@ function updateProfileCreate(_, args, context, info) {
                 lastName: args.lastName,
                 dateOfBirth: args.dob,
                 occupation: args.occupation,
-                employer: {
-                    create: {
-                        orgName: args.employer.orgName,
-                        orgType: args.employer.orgType,
-                        country: args.employer.country,
-                        address: args.employer.address,
-                    }
-                },
+                // employer: {
+                //     create: {
+                //         orgName: args.employer.orgName,
+                //         orgType: args.employer.orgType,
+                //         country: args.employer.country,
+                //         address: args.employer.address,
+                //     }
+                // },
                 // accredidations: {
                 //     create: {
                 //         accredsName: args.accreds.accredsName,
@@ -94,6 +102,8 @@ function updateProfileCreate(_, args, context, info) {
             }
         }
     )
+    console.log(result)
+    return result
 }
 
 function updateProfileConnect(_, args, context, info) {
@@ -426,6 +436,5 @@ module.exports = {
     registerProfile,
     updateReviewedCount,
     updatePublishedCount,
-    updateFlaggedCount
-    
+    updateFlaggedCount    
 }
