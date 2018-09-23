@@ -1,8 +1,8 @@
-const { getAccountId } = require('../utils');
+const { verifyToken } = require('../utils');
 
 
 async function createProfile(_, args, context, info) {
-    const payload = getAccountId(context);
+    const payload = verifyToken(context);
     return context.prisma.mutation.createProfile(
         {
             data: {
@@ -55,7 +55,7 @@ function registerProfile(_, args, context, info) {
     )
 }
 async function updateProfileCreate(_, args, context, info) {
-    const payload = getAccountId(context);
+    const payload = verifyToken(context);
 
     const profile = await context.prisma.query.profile(
         {
@@ -102,12 +102,11 @@ async function updateProfileCreate(_, args, context, info) {
             }
         }
     )
-    console.log(result)
     return result
 }
 
 function updateProfileConnect(_, args, context, info) {
-    const payload = getAccountId(context);
+    const payload = verifyToken(context);
     return context.prisma.mutation.updateProfile(
         {
             where: {
@@ -135,7 +134,7 @@ function updateProfileConnect(_, args, context, info) {
 }
 
 function removeProfile(_, args, context, info) {
-    const payload = getAccountId(context);
+    const payload = verifyToken(context);
     return context.prisma.mutation.deleteProfile(
         {
             where: {
@@ -146,7 +145,7 @@ function removeProfile(_, args, context, info) {
 }
 
 function createAccredsConnect(_, args, context, info) {
-    const payload = getAccountId(context);
+    const payload = verifyToken(context);
     return context.prisma.mutation.createAccredidation(
         {
             data: {
@@ -166,7 +165,7 @@ function createAccredsConnect(_, args, context, info) {
 }
 
 function createAccredsCreate(_, args, context, info) {
-    const payload = getAccountId(context);
+    const payload = verifyToken(context);
     return context.prisma.mutation.createAccredidation(
         {
             data: {
@@ -190,7 +189,7 @@ function createAccredsCreate(_, args, context, info) {
 }
 
 function updateAccreds(_, args, context, info) {
-    const payload = getAccountId(context);
+    const payload = verifyToken(context);
     return context.prisma.mutation.updateAccredidation(
         {
             where: {
@@ -213,7 +212,7 @@ function updateAccreds(_, args, context, info) {
 }
 
 function removeAccreds(_, args, context, info) {
-    const payload = getAccountId(context);
+    const payload = verifyToken(context);
     return context.prisma.mutation.deleteAccredidation(
         {
             where: {
@@ -224,7 +223,7 @@ function removeAccreds(_, args, context, info) {
 }
 
 function createOrganization(_, args, context, info) {
-    const payload = getAccountId(context);
+    const payload = verifyToken(context);
     return context.prisma.mutation.createOrganization(
         {
             data: {
@@ -240,7 +239,7 @@ function createOrganization(_, args, context, info) {
 }
 
 function updateOrganization(_, args, context, info) {
-    const payload = getAccountId(context);
+    const payload = verifyToken(context);
     return context.prisma.mutation.createOrganization(
         {
             where: {
@@ -259,7 +258,7 @@ function updateOrganization(_, args, context, info) {
 }
 
 function removeOrganization(_, args, context, info) {
-    const payload = getAccountId(context);
+    const payload = verifyToken(context);
     return context.prisma.mutation.deleteOrganization(
         {
             where: {
@@ -270,7 +269,7 @@ function removeOrganization(_, args, context, info) {
 }
 
 function addAccredsToProfile(_, args, context, info) {
-    const payload = getAccountId(context);
+    const payload = verifyToken(context);
     return context.prisma.mutation.updateProfile(
         {
             where: {
@@ -289,7 +288,7 @@ function addAccredsToProfile(_, args, context, info) {
 }
 
 function addNewEmployerToProfile(_, args, context, info) {
-    const payload = getAccountId(context);
+    const payload = verifyToken(context);
     return context.prisma.mutation.updateProfile(
         {
             where: {
@@ -310,7 +309,7 @@ function addNewEmployerToProfile(_, args, context, info) {
 }
 
 function addEmployerToProfile(_, args, context, info) {
-    const payload = getAccountId(context);
+    const payload = verifyToken(context);
     return context.prisma.mutation.updateProfile(
         {
             where: {
@@ -328,7 +327,7 @@ function addEmployerToProfile(_, args, context, info) {
 }
 
 function addStoriesToProfile(_, args, context, info) {
-    const payload = getAccountId(context);
+    const payload = verifyToken(context);
     return context.prisma.mutation.updateProfile(
         {
             where: {
@@ -346,7 +345,7 @@ function addStoriesToProfile(_, args, context, info) {
 }
 
 async function updateFlaggedCount(_, args, context, info) {
-    const payload = getAccountId(context);
+    const payload = verifyToken(context);
     const profile = await context.prisma.query.profile(
         {
             where: {
@@ -370,7 +369,7 @@ async function updateFlaggedCount(_, args, context, info) {
 }
 
 async function updatePublishedCount(_, args, context, info) {
-    const payload = getAccountId(context);
+    const payload = verifyToken(context);
     const profile = await context.prisma.query.profile(
         {
             where: {
@@ -394,7 +393,7 @@ async function updatePublishedCount(_, args, context, info) {
 }
 
 async function updateReviewedCount(_, args, context, info) {
-    const payload = getAccountId(context);
+    const payload = verifyToken(context);
     const profile = await context.prisma.query.profile(
         {
             where: {

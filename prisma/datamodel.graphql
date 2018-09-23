@@ -1,7 +1,7 @@
 type Profile {
   id: ID! @unique
   account_id: ID @unique
-  userName: String @unique
+  userName: String
   firstName: String
   lastName: String
   dateOfBirth: String

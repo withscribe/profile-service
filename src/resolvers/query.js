@@ -1,8 +1,8 @@
-const { getAccountId } = require('../utils');
+const { verifyToken } = require('../utils');
 
 
 function profileById(_, args, context, info) {
-    const payload = getAccountId(context);
+    const payload = verifyToken(context);
     return context.prisma.query.profile(
         {
             where: {
@@ -13,7 +13,7 @@ function profileById(_, args, context, info) {
     )
 }
 function profileByAccountId(_, args, context, info) {
-    const payload = getAccountId(context);
+    const payload = verifyToken(context);
     return context.prisma.query.profile(
         {
             where: {
@@ -24,18 +24,19 @@ function profileByAccountId(_, args, context, info) {
     )
 }
 function profileByUsername(_, args, context, info) {
-    const payload = getAccountId(context);
-    console.log(payload)
-    return context.prisma.query.profile(
+    const payload = verifyToken(context);
+    return context.prisma.query.profiles(
         {
             where: {
-                userName: args.userName
+                OR: [
+                    { userName_contains: args.userName }
+                ]
             }
         }
     )
 }
 function orgById(_, args, context, info) {
-    const payload = getAccountId(context);
+    const payload = verifyToken(context);
     return context.prisma.query.organization(
         {
             where: {
@@ -47,7 +48,7 @@ function orgById(_, args, context, info) {
 }
 
 function accredById(_, args, context, info) {
-    const payload = getAccountId(context);
+    const payload = verifyToken(context);
     return context.prisma.query.organization(
         {
             where: {
@@ -59,7 +60,7 @@ function accredById(_, args, context, info) {
 }
 
 function searchProfiles(_, args, context, info) {
-    const payload = getAccountId(context);
+    const payload = verifyToken(context);
     return context.prisma.query.profiles(
         {
             where: {
@@ -75,7 +76,7 @@ function searchProfiles(_, args, context, info) {
     )
 }
 function searchOrganizations(_, args, context, info)  {
-    const payload = getAccountId(context);
+    const payload = verifyToken(context);
     return context.prisma.query.organizations(
         {
             where: {
@@ -91,7 +92,7 @@ function searchOrganizations(_, args, context, info)  {
 }
 
 function searchAccreds(_, args, context, info)  {
-    const payload = getAccountId(context);
+    const payload = verifyToken(context);
     return context.prisma.query.organizations(
         {
             where: {
@@ -106,31 +107,33 @@ function searchAccreds(_, args, context, info)  {
     )
 }
 function allProfiles(_, args, context, info) {
-    const payload = getAccountId(context);
+    const payload = verifyToken(context);
     return context.prisma.query.profiles(
         _, info
     )
 
 }
 function allOrganizations(_, args, context, info) {
-    const payload = getAccountId(context);
+    const payload = verifyToken(context);
     return context.prisma.query.organizations(
         _, info
     )
 }
 
 function allAccreds(_, args, context, info) {
-    const payload = getAccountId(context);
+    const payload = verifyToken(context);
     return context.prisma.query.accredidations(
         _, info
     )
 }
 
-function userNameExists(_, args, context, info) {
-    return context.prisma.query.profile(
+async function userNameExists(_, args, context, info) {
+    return await context.prisma.query.profiles(
         {
             where:  {
-                userName: args.userName
+                OR: [
+                    {userName_contains: args.userName}
+                ]
             }
         }, 
         info

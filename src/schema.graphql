@@ -7,14 +7,14 @@ type Query {
     allProfiles: [Profile!]!
     profileById(id: ID!): Profile
     profileByAccountId(accountId: ID!): Profile
-    profileByUsername(userName: String!): Profile
+    profileByUsername(userName: String!): [Profile!]!
     allOrganizations: [Organization!]!
     searchOrganizations(searchString: String!): [Organization!]!
     searchAccreds(searchString: String!): [Accredidation!]!
     allAccreds: [Accredidation!]!
     accredById(id: ID!): Accredidation
     orgById(id: ID!): Organization
-    userNameExists(userName: String!): Profile
+    userNameExists(userName: String!): [Profile!]!
    
 }
 
