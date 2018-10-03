@@ -128,12 +128,10 @@ function allAccreds(_, args, context, info) {
 }
 
 async function userNameExists(_, args, context, info) {
-    return await context.prisma.query.profiles(
+    return await context.prisma.query.profile(
         {
             where:  {
-                OR: [
-                    {userName_contains: args.userName}
-                ]
+                userName: args.userName
             }
         }, 
         info

@@ -1,5 +1,5 @@
 # source: http://localhost:4467
-# timestamp: Tue Sep 18 2018 20:02:03 GMT-0400 (Eastern Daylight Time)
+# timestamp: Wed Oct 03 2018 14:40:07 GMT-0400 (Eastern Daylight Time)
 
 type Accredidation implements Node {
   id: ID!
@@ -1292,6 +1292,7 @@ input ProfileWhereInput {
 input ProfileWhereUniqueInput {
   id: ID
   account_id: ID
+  userName: String
 }
 
 type Query {

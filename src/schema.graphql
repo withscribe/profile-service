@@ -14,7 +14,7 @@ type Query {
     allAccreds: [Accredidation!]!
     accredById(id: ID!): Accredidation
     orgById(id: ID!): Organization
-    userNameExists(userName: String!): [Profile!]!
+    userNameExists(userName: String!): Profile
    
 }
 

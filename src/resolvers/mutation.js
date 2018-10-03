@@ -44,7 +44,18 @@ async function createProfile(_, args, context, info) {
     )
 }
 
-function registerProfile(_, args, context, info) {
+async function registerProfile(_, args, context, info) {
+
+    const exists = await context.prisma.query.profile(
+        {
+            where:  {
+                userName: args.userName
+            }
+        }, 
+        info
+    )
+    console.log(exists)
+
     return context.prisma.mutation.createProfile(
         {
             data: {
@@ -64,13 +75,30 @@ async function updateProfileCreate(_, args, context, info) {
             }
         }
     )
-    const result = await context.prisma.mutation.updateProfile(
+
+    if(args.userName != profile.userName) {
+        const exists = await context.prisma.query.profile(
+            {
+                where:  {
+                    userName: args.userName
+                }
+            }, 
+            info
+        )
+
+        if(exists == null) {
+            profile.userName = args.userName
+        } else {
+            throw new Error("Username has already been taken")
+        }
+    }
+    const updatedProfile = await context.prisma.mutation.updateProfile(
         {
             where: {
                 id: profile.id
             },
             data: {
-                userName: args.userName,
+                userName: profile.userName,
                 firstName: args.firstName,
                 lastName: args.lastName,
                 dateOfBirth: args.dob,
@@ -102,7 +130,7 @@ async function updateProfileCreate(_, args, context, info) {
             }
         }
     )
-    return result
+    return updatedProfile
 }
 
 function updateProfileConnect(_, args, context, info) {
