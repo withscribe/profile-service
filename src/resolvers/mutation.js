@@ -444,6 +444,70 @@ async function updateReviewedCount(_, args, context, info) {
     )
 }
 
+async function addLikedStory(_, args, context, info) {
+    const payload = verifyToken(context);
+
+    const profile = await context.prisma.query.profile(
+        {
+            where: {
+                account_id: payload.accountId
+            }
+        }
+    )
+    const like = await context.prisma.mutation.createLikes(
+        {
+            data: {
+                guid: args.storyId + profile.id
+            }
+        }, ` { id }`
+    )
+
+    const profileToBeUpdated = await context.prisma.mutation.updateProfile(
+        {
+            where: {
+                id: profile.id
+            },
+            data: {
+                storiesLiked: { connect: { id: like.id } }
+            }
+        }
+    )
+
+    return profileToBeUpdated
+}
+
+async function removeLikedStory(_, args, context, info) {
+    const payload = verifyToken(context);
+
+    const profile = await context.prisma.query.profile(
+        {
+            where: {
+                account_id: payload.accountId
+            }
+        }
+    )
+    const like = await context.prisma.query.likes(
+        {
+            where: {
+                guid: args.storyId + profile.id
+            }
+        }, ` { id }`
+    )
+
+    const profileToBeUpdated = await context.prisma.mutation.updateProfile(
+        {
+            where: {
+                id: profile.id
+            },
+            data: {
+                storiesLiked: { delete: { id: like.id } }
+            }
+        }
+    )
+
+    return profileToBeUpdated
+}
+
 module.exports = { 
     addStoriesToProfile,
     addEmployerToProfile,
@@ -463,5 +527,7 @@ module.exports = {
     registerProfile,
     updateReviewedCount,
     updatePublishedCount,
-    updateFlaggedCount    
+    updateFlaggedCount,
+    addLikedStory,
+    removeLikedStory    
 }

@@ -1,5 +1,5 @@
 # source: http://localhost:4467
-# timestamp: Wed Oct 03 2018 14:40:07 GMT-0400 (Eastern Daylight Time)
+# timestamp: Sun Oct 21 2018 15:35:40 GMT-0400 (Eastern Daylight Time)
 
 type Accredidation implements Node {
   id: ID!
@@ -362,6 +362,10 @@ type AggregateAccredidation {
   count: Int!
 }
 
+type AggregateLikes {
+  count: Int!
+}
+
 type AggregateOrganization {
   count: Int!
 }
@@ -375,6 +379,218 @@ type BatchPayload {
   count: Long!
 }
 
+type Likes implements Node {
+  id: ID!
+  guid: String
+}
+
+"""A connection to a list of items."""
+type LikesConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [LikesEdge]!
+  aggregate: AggregateLikes!
+}
+
+input LikesCreateInput {
+  guid: String
+}
+
+input LikesCreateManyInput {
+  create: [LikesCreateInput!]
+  connect: [LikesWhereUniqueInput!]
+}
+
+"""An edge in a connection."""
+type LikesEdge {
+  """The item at the end of the edge."""
+  node: Likes!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum LikesOrderByInput {
+  id_ASC
+  id_DESC
+  guid_ASC
+  guid_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type LikesPreviousValues {
+  id: ID!
+  guid: String
+}
+
+type LikesSubscriptionPayload {
+  mutation: MutationType!
+  node: Likes
+  updatedFields: [String!]
+  previousValues: LikesPreviousValues
+}
+
+input LikesSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [LikesSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [LikesSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [LikesSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: LikesWhereInput
+}
+
+input LikesUpdateDataInput {
+  guid: String
+}
+
+input LikesUpdateInput {
+  guid: String
+}
+
+input LikesUpdateManyInput {
+  create: [LikesCreateInput!]
+  connect: [LikesWhereUniqueInput!]
+  disconnect: [LikesWhereUniqueInput!]
+  delete: [LikesWhereUniqueInput!]
+  update: [LikesUpdateWithWhereUniqueNestedInput!]
+  upsert: [LikesUpsertWithWhereUniqueNestedInput!]
+}
+
+input LikesUpdateWithWhereUniqueNestedInput {
+  where: LikesWhereUniqueInput!
+  data: LikesUpdateDataInput!
+}
+
+input LikesUpsertWithWhereUniqueNestedInput {
+  where: LikesWhereUniqueInput!
+  update: LikesUpdateDataInput!
+  create: LikesCreateInput!
+}
+
+input LikesWhereInput {
+  """Logical AND on all given filters."""
+  AND: [LikesWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [LikesWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [LikesWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  guid: String
+
+  """All values that are not equal to given value."""
+  guid_not: String
+
+  """All values that are contained in given list."""
+  guid_in: [String!]
+
+  """All values that are not contained in given list."""
+  guid_not_in: [String!]
+
+  """All values less than the given value."""
+  guid_lt: String
+
+  """All values less than or equal the given value."""
+  guid_lte: String
+
+  """All values greater than the given value."""
+  guid_gt: String
+
+  """All values greater than or equal the given value."""
+  guid_gte: String
+
+  """All values containing the given string."""
+  guid_contains: String
+
+  """All values not containing the given string."""
+  guid_not_contains: String
+
+  """All values starting with the given string."""
+  guid_starts_with: String
+
+  """All values not starting with the given string."""
+  guid_not_starts_with: String
+
+  """All values ending with the given string."""
+  guid_ends_with: String
+
+  """All values not ending with the given string."""
+  guid_not_ends_with: String
+}
+
+input LikesWhereUniqueInput {
+  id: ID
+  guid: String
+}
+
 """
 The `Long` scalar type represents non-fractional signed whole numeric values.
 Long can represent values between -(2^63) and 2^63 - 1.
@@ -384,21 +600,27 @@ scalar Long
 type Mutation {
   createProfile(data: ProfileCreateInput!): Profile!
   createAccredidation(data: AccredidationCreateInput!): Accredidation!
+  createLikes(data: LikesCreateInput!): Likes!
   createOrganization(data: OrganizationCreateInput!): Organization!
   updateProfile(data: ProfileUpdateInput!, where: ProfileWhereUniqueInput!): Profile
   updateAccredidation(data: AccredidationUpdateInput!, where: AccredidationWhereUniqueInput!): Accredidation
+  updateLikes(data: LikesUpdateInput!, where: LikesWhereUniqueInput!): Likes
   updateOrganization(data: OrganizationUpdateInput!, where: OrganizationWhereUniqueInput!): Organization
   deleteProfile(where: ProfileWhereUniqueInput!): Profile
   deleteAccredidation(where: AccredidationWhereUniqueInput!): Accredidation
+  deleteLikes(where: LikesWhereUniqueInput!): Likes
   deleteOrganization(where: OrganizationWhereUniqueInput!): Organization
   upsertProfile(where: ProfileWhereUniqueInput!, create: ProfileCreateInput!, update: ProfileUpdateInput!): Profile!
   upsertAccredidation(where: AccredidationWhereUniqueInput!, create: AccredidationCreateInput!, update: AccredidationUpdateInput!): Accredidation!
+  upsertLikes(where: LikesWhereUniqueInput!, create: LikesCreateInput!, update: LikesUpdateInput!): Likes!
   upsertOrganization(where: OrganizationWhereUniqueInput!, create: OrganizationCreateInput!, update: OrganizationUpdateInput!): Organization!
   updateManyProfiles(data: ProfileUpdateInput!, where: ProfileWhereInput): BatchPayload!
   updateManyAccredidations(data: AccredidationUpdateInput!, where: AccredidationWhereInput): BatchPayload!
+  updateManyLikeses(data: LikesUpdateInput!, where: LikesWhereInput): BatchPayload!
   updateManyOrganizations(data: OrganizationUpdateInput!, where: OrganizationWhereInput): BatchPayload!
   deleteManyProfiles(where: ProfileWhereInput): BatchPayload!
   deleteManyAccredidations(where: AccredidationWhereInput): BatchPayload!
+  deleteManyLikeses(where: LikesWhereInput): BatchPayload!
   deleteManyOrganizations(where: OrganizationWhereInput): BatchPayload!
 }
 
@@ -788,6 +1010,7 @@ type Profile implements Node {
   occupation: String
   employer(where: OrganizationWhereInput): Organization
   accredidations(where: AccredidationWhereInput, orderBy: AccredidationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Accredidation!]
+  storiesLiked(where: LikesWhereInput, orderBy: LikesOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Likes!]
   stories: [ID!]!
 }
 
@@ -814,6 +1037,7 @@ input ProfileCreateInput {
   stories: ProfileCreatestoriesInput
   employer: OrganizationCreateOneInput
   accredidations: AccredidationCreateManyInput
+  storiesLiked: LikesCreateManyInput
 }
 
 input ProfileCreatestoriesInput {
@@ -922,6 +1146,7 @@ input ProfileUpdateInput {
   stories: ProfileUpdatestoriesInput
   employer: OrganizationUpdateOneInput
   accredidations: AccredidationUpdateManyInput
+  storiesLiked: LikesUpdateManyInput
 }
 
 input ProfileUpdatestoriesInput {
@@ -1287,6 +1512,9 @@ input ProfileWhereInput {
   accredidations_every: AccredidationWhereInput
   accredidations_some: AccredidationWhereInput
   accredidations_none: AccredidationWhereInput
+  storiesLiked_every: LikesWhereInput
+  storiesLiked_some: LikesWhereInput
+  storiesLiked_none: LikesWhereInput
 }
 
 input ProfileWhereUniqueInput {
@@ -1298,12 +1526,15 @@ input ProfileWhereUniqueInput {
 type Query {
   profiles(where: ProfileWhereInput, orderBy: ProfileOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Profile]!
   accredidations(where: AccredidationWhereInput, orderBy: AccredidationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Accredidation]!
+  likeses(where: LikesWhereInput, orderBy: LikesOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Likes]!
   organizations(where: OrganizationWhereInput, orderBy: OrganizationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Organization]!
   profile(where: ProfileWhereUniqueInput!): Profile
   accredidation(where: AccredidationWhereUniqueInput!): Accredidation
+  likes(where: LikesWhereUniqueInput!): Likes
   organization(where: OrganizationWhereUniqueInput!): Organization
   profilesConnection(where: ProfileWhereInput, orderBy: ProfileOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ProfileConnection!
   accredidationsConnection(where: AccredidationWhereInput, orderBy: AccredidationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AccredidationConnection!
+  likesesConnection(where: LikesWhereInput, orderBy: LikesOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LikesConnection!
   organizationsConnection(where: OrganizationWhereInput, orderBy: OrganizationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): OrganizationConnection!
 
   """Fetches an object given its ID"""
@@ -1316,5 +1547,6 @@ type Query {
 type Subscription {
   profile(where: ProfileSubscriptionWhereInput): ProfileSubscriptionPayload
   accredidation(where: AccredidationSubscriptionWhereInput): AccredidationSubscriptionPayload
+  likes(where: LikesSubscriptionWhereInput): LikesSubscriptionPayload
   organization(where: OrganizationSubscriptionWhereInput): OrganizationSubscriptionPayload
 }

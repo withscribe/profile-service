@@ -39,6 +39,8 @@ type Mutation {
     updateFlaggedCount(profileId: ID!): Profile
     updatePublishedCount(profileId: ID!): Profile
     updateReviewedCount(profileId: ID!): Profile
+    addLikedStory(storyId: ID!): Profile
+    removeLikedStory(storyId: ID!): Profile
 }
 
 input OrganizationInput {
