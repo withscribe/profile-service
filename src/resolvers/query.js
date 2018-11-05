@@ -1,15 +1,16 @@
 const { verifyToken } = require('../utils');
 
 
-function profileById(_, args, context, info) {
+async function profileById(_, args, context, info) {
     const payload = verifyToken(context);
-    return context.prisma.query.profile(
+    
+    return profile = await context.prisma.query.profile(
         {
             where: {
                 id: args.id,
             },
         },
-        info,
+        ` { id } `
     )
 }
 function profileByAccountId(_, args, context, info) {

@@ -17,8 +17,6 @@ type Profile {
 
 type Likes {
   id: ID! @unique
-  # storyId: String
-  # profileId: String
   guid: String @unique
 }
 

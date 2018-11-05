@@ -1,13 +1,15 @@
 {
-  "name": "unravel_profile_service",
+  "name": "scribe_profile_service",
   "version": "1.0.0",
-  "description": "Unravel's Profile GraphQL service",
+  "description": "User Profile microservice for Scribe",
   "main": "index.js",
   "dependencies": {
     "dotenv": "^6.0.0",
+    "graphql": "^0.13.2",
     "graphql-yoga": "^1.14.6",
     "npm": "^6.0.1",
-    "prisma-binding": "^2.0.2"
+    "prisma-binding": "^2.0.2",
+    "prisma-client-lib": "^1.19.3"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -15,8 +17,9 @@
     "nodemon": "^1.17.5"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --exec node src/index.js"
+    "test": "nodemon --exec node src/index.js",
+    "start": "pm2 start profile-service",
+    "restart": "pm2 restart profile-service"
   },
   "author": "Austin Howlett",
   "license": "ISC"
