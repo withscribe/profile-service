@@ -10,7 +10,6 @@ type Profile {
   flaggedStories: Int @default(value: 0)
   occupation: String @default(value: "N/A")
   employer: Organization
-  accredidations: [Accredidation!]!
   storiesLiked: [Likes!]!
   stories: [ID!]!
 }
@@ -26,13 +25,4 @@ type Organization {
   address: String!
   country: String!
   orgType: String!
-}
-
-type Accredidation {
-  id: ID! @unique
-  accredsName: String!
-  accredsDesc: String!
-  accredsType: String!
-  dateReceived: String!
-  accreditorOrg: Organization!
 }

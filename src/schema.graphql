@@ -1,7 +1,3 @@
-# import Profile from './generated/prisma.graphql'
-# import Accredidations from './generated/prisma.graphql'
-# import Organization from './generated/prisma.graphql'
-
 type Query {
     searchProfiles(searchString: String!): [Profile!]!
     allProfiles: [Profile!]!
@@ -10,29 +6,20 @@ type Query {
     profileByUsername(userName: String!): [Profile!]!
     allOrganizations: [Organization!]!
     searchOrganizations(searchString: String!): [Organization!]!
-    searchAccreds(searchString: String!): [Accredidation!]!
-    allAccreds: [Accredidation!]!
-    accredById(id: ID!): Accredidation
     orgById(id: ID!): Organization
     userNameExists(userName: String!): Profile
    
 }
 
 type Mutation {
-    updateProfileConnect(userName: String, firstName: String, lastName: String, dob: String, occupation: String, employerId: ID, accredsIds: [ID!]!): Profile
+    updateProfileConnect(userName: String, firstName: String, lastName: String, dob: String, occupation: String, employerId: ID): Profile
     registerProfile(accountId: ID! userName: String!): Profile
-    createProfile(accountId: ID, userName: String!, firstName: String, lastName: String, dob: String, occupation: String, employer: OrganizationInput, accreds: [AccredidationInput!]!): Profile
+    createProfile(accountId: ID, userName: String!, firstName: String, lastName: String, dob: String, occupation: String, employer: OrganizationInput): Profile
     updateProfileCreate(userName: String, firstName: String, lastName: String, dob: String, occupation: String, employer: OrganizationInput): Profile
-    # updateProfileCreate(userName: String, firstName: String, lastName: String, dob: String, occupation: String, employer: OrganizationInput, accreds: [AccredidationInput!]!): Profile
     removeProfile(id: ID, userName: String): Profile
-    createAccredsConnect(name: String!, desc: String!, type: String! dateReceived: String!, accreditorId: ID!): Accredidation
-    createAccredsCreate(name: String!, desc: String!, type: String! dateReceived: String!, accreditor: OrganizationInput!): Accredidation
-    updateAccreds(acredId: ID!, name: String, desc: String, type: String, dateReceived: String, accreditorId: ID!): Accredidation
-    removeAccreds(id: ID!): Accredidation
     createOrganization(orgName: String!, address: String!, country: String!, orgType: String!): Organization
     updateOrganization(orgId: ID!, orgName: String, address: String, country: String, orgType: String): Organization
     removeOrganization(id: ID!): Organization
-    addAccredsToProfile(accredidationIds: [ID!]!): Profile
     addNewEmployerToProfile(employer: OrganizationInput): Profile
     addEmployerToProfile(employerId: ID!): Profile
     addStoriesToProfile(storyIds: [ID!]!): Profile
@@ -50,10 +37,31 @@ input OrganizationInput {
     address: String!
 }
 
-input AccredidationInput {
-    accredsName: String!
-    accredsDesc: String!
-    accredsType: String!
-    dateReceived: String!
-    accreditorOrg: OrganizationInput!
+type Profile {
+  id: ID!
+  account_id: ID
+  userName: String
+  firstName: String
+  lastName: String
+  dateOfBirth: String
+  storiesPublished: Int
+  storiesReviewed: Int
+  flaggedStories: Int
+  occupation: String
+  employer: Organization
+  storiesLiked: [Likes!]!
+  stories: [ID!]!
+}
+
+type Likes {
+  id: ID!
+  guid: String
+}
+
+type Organization {
+  id: ID!
+  orgName: String!
+  address: String!
+  country: String!
+  orgType: String!
 }
