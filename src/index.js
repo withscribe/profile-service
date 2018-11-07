@@ -1,6 +1,7 @@
 const { GraphQLServer } = require('graphql-yoga')
 const { prisma } = require('./generated/prisma-client')
 const ora = require('ora')
+require('dotenv').config()
 
 const Query = require('./resolvers/query')
 const Mutation = require('./resolvers/mutation')
@@ -20,7 +21,7 @@ const server = new GraphQLServer({
 });
 
 const options = {
-    port: 3000,
+    port: process.env.PORT,
     endpoint: '/profile',
     subscriptions: '/sub/profile',
     playground: '/profile/playground'
