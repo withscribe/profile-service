@@ -8,13 +8,6 @@ image: node:latest
 pipelines:
   default:
     - step:
-        name: Starting Deployment Pipeline
-        caches:
-          - node
-        script: # Modify the commands below to build your repository.
-          - echo "Starting deployment pipeline..."
-          - echo "Deployment pipeline started."
-    - step:
         name: Deploy to Production
         deployment: production   # can be test, staging or production.
         trigger: manual  # Uncomment to make this a manual deployment.

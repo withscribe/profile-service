@@ -11,7 +11,7 @@ type Profile {
   occupation: String @default(value: "N/A")
   employer: Organization
   storiesLiked: [Likes!]!
-  stories: [ID!]!
+  communitiesIds: [ID!]!
 }
 
 type Likes {
