@@ -52,7 +52,7 @@ type Profile {
   occupation: String
   employer: Organization
   storiesLiked: [Likes!]!
-  stories: [ID!]!
+  communitiesIds: [ID!]!
 }
 
 type Likes {

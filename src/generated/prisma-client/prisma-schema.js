@@ -376,13 +376,17 @@ type Profile {
   occupation: String
   employer: Organization
   storiesLiked(where: LikesWhereInput, orderBy: LikesOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Likes!]
-  stories: [ID!]!
+  communitiesIds: [ID!]!
 }
 
 type ProfileConnection {
   pageInfo: PageInfo!
   edges: [ProfileEdge]!
   aggregate: AggregateProfile!
+}
+
+input ProfileCreatecommunitiesIdsInput {
+  set: [ID!]
 }
 
 input ProfileCreateInput {
@@ -397,11 +401,7 @@ input ProfileCreateInput {
   occupation: String
   employer: OrganizationCreateOneInput
   storiesLiked: LikesCreateManyInput
-  stories: ProfileCreatestoriesInput
-}
-
-input ProfileCreatestoriesInput {
-  set: [ID!]
+  communitiesIds: ProfileCreatecommunitiesIdsInput
 }
 
 type ProfileEdge {
@@ -447,7 +447,7 @@ type ProfilePreviousValues {
   storiesReviewed: Int
   flaggedStories: Int
   occupation: String
-  stories: [ID!]!
+  communitiesIds: [ID!]!
 }
 
 type ProfileSubscriptionPayload {
@@ -468,6 +468,10 @@ input ProfileSubscriptionWhereInput {
   NOT: [ProfileSubscriptionWhereInput!]
 }
 
+input ProfileUpdatecommunitiesIdsInput {
+  set: [ID!]
+}
+
 input ProfileUpdateInput {
   account_id: ID
   userName: String
@@ -480,11 +484,7 @@ input ProfileUpdateInput {
   occupation: String
   employer: OrganizationUpdateOneInput
   storiesLiked: LikesUpdateManyInput
-  stories: ProfileUpdatestoriesInput
-}
-
-input ProfileUpdatestoriesInput {
-  set: [ID!]
+  communitiesIds: ProfileUpdatecommunitiesIdsInput
 }
 
 input ProfileWhereInput {

@@ -225,7 +225,7 @@ addLikedStory = async (_, args, context, info) => {
   })
 }
 
-removeLikedStory = (_, args, context, info) => {
+removeLikedStory = async (_, args, context, info) => {
   const payload = verifyToken(context);
 
   const profile = await context.prisma.profile({ account_id: payload.accountId })
@@ -242,10 +242,11 @@ removeLikedStory = (_, args, context, info) => {
 }
 
 setCommunityToProfile = async (_, args, context, info) => {
-    const payload = verifyToken(context)
-    const profile = await context.prisma.profile({ id: args.id })
+  const payload = verifyToken(context)
+  const profile = await context.prisma.profile({ id: args.id })
 
-    const updatedList = community.communitiesIds
+  if(profile.communitiesIds !== undefined) {
+    const updatedList = profile.communitiesIds
     updatedList.push(args.communityId)
 
     return await context.prisma.updateProfile({
@@ -258,7 +259,19 @@ setCommunityToProfile = async (_, args, context, info) => {
         }
       }
     })
-    // add profile fragment
+  } else {
+    return await context.prisma.updateProfile({
+      where: {
+        id: args.id
+      },
+      data: {
+        communitiesIds: {
+          set: args.communityId
+        }
+      }
+    })
+  }
+  // add profile fragment
 }
 
 module.exports = { 

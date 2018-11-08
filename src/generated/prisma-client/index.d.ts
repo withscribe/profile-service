@@ -430,7 +430,7 @@ export interface OrganizationUpdateDataInput {
   orgType?: String;
 }
 
-export interface ProfileUpdatestoriesInput {
+export interface ProfileUpdatecommunitiesIdsInput {
   set?: ID_Input[] | ID_Input;
 }
 
@@ -461,7 +461,7 @@ export interface ProfileUpdateInput {
   occupation?: String;
   employer?: OrganizationUpdateOneInput;
   storiesLiked?: LikesUpdateManyInput;
-  stories?: ProfileUpdatestoriesInput;
+  communitiesIds?: ProfileUpdatecommunitiesIdsInput;
 }
 
 export interface LikesWhereInput {
@@ -498,7 +498,7 @@ export interface LikesWhereInput {
   NOT?: LikesWhereInput[] | LikesWhereInput;
 }
 
-export interface ProfileCreatestoriesInput {
+export interface ProfileCreatecommunitiesIdsInput {
   set?: ID_Input[] | ID_Input;
 }
 
@@ -534,7 +534,7 @@ export interface ProfileCreateInput {
   occupation?: String;
   employer?: OrganizationCreateOneInput;
   storiesLiked?: LikesCreateManyInput;
-  stories?: ProfileCreatestoriesInput;
+  communitiesIds?: ProfileCreatecommunitiesIdsInput;
 }
 
 export interface OrganizationCreateOneInput {
@@ -670,7 +670,7 @@ export interface ProfilePreviousValuesNode {
   storiesReviewed?: Int;
   flaggedStories?: Int;
   occupation?: String;
-  stories: ID_Output[];
+  communitiesIds: ID_Output[];
 }
 
 export interface ProfilePreviousValues
@@ -686,7 +686,7 @@ export interface ProfilePreviousValues
   storiesReviewed: () => Promise<Int>;
   flaggedStories: () => Promise<Int>;
   occupation: () => Promise<String>;
-  stories: () => Promise<ID_Output[]>;
+  communitiesIds: () => Promise<ID_Output[]>;
 }
 
 export interface ProfilePreviousValuesSubscription
@@ -702,7 +702,7 @@ export interface ProfilePreviousValuesSubscription
   storiesReviewed: () => Promise<AsyncIterator<Int>>;
   flaggedStories: () => Promise<AsyncIterator<Int>>;
   occupation: () => Promise<AsyncIterator<String>>;
-  stories: () => Promise<AsyncIterator<ID_Output[]>>;
+  communitiesIds: () => Promise<AsyncIterator<ID_Output[]>>;
 }
 
 export interface OrganizationNode {
@@ -1023,7 +1023,7 @@ export interface ProfileNode {
   storiesReviewed?: Int;
   flaggedStories?: Int;
   occupation?: String;
-  stories: ID_Output[];
+  communitiesIds: ID_Output[];
 }
 
 export interface Profile extends Promise<ProfileNode>, Fragmentable {
@@ -1049,7 +1049,7 @@ export interface Profile extends Promise<ProfileNode>, Fragmentable {
       last?: Int;
     }
   ) => T;
-  stories: () => Promise<ID_Output[]>;
+  communitiesIds: () => Promise<ID_Output[]>;
 }
 
 export interface ProfileSubscription
@@ -1077,7 +1077,7 @@ export interface ProfileSubscription
       last?: Int;
     }
   ) => T;
-  stories: () => Promise<AsyncIterator<ID_Output[]>>;
+  communitiesIds: () => Promise<AsyncIterator<ID_Output[]>>;
 }
 
 export interface ProfileSubscriptionPayloadNode {

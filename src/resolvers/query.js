@@ -69,9 +69,9 @@ userNameExists = async (_, args, context, info) => {
   return await context.prisma.profile({ userName: args.userName })
 }
 
-communitiesMembers = (_, args, context, info) => {
+communitiesMembers = async (_, args, context, info) => {
   const payload = verifyToken(context)
-  return context.prisma.profiles({where: { id_in: args.membersIds }})
+  return await context.prisma.profiles({where: { id_in: args.membersIds }})
 }
 
 module.exports = {
@@ -84,6 +84,5 @@ module.exports = {
   searchOrganizations,
   orgById,
   userNameExists,
-  profilesByCommunityId,
   communitiesMembers
 }
