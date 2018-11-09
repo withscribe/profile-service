@@ -9,7 +9,7 @@ type Query {
     orgById(id: ID!): Organization
     userNameExists(userName: String!): Profile
     communitiesMembers(membersIds: [ID!]): [Profile!]!
-   
+
 }
 
 type Mutation {
