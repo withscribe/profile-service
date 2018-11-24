@@ -231,14 +231,15 @@ removeLikedStory = async (_, args, context, info) => {
   const payload = verifyToken(context);
 
   const profile = await context.prisma.profile({ account_id: payload.accountId })
-  const like = await context.prisma.createLikes({ guid: args.storyId + profile.id })
+  const guid = args.storyId + profile.id
+  const likeToRemove = await context.prisma.likes({ guid: guid })
 
   return await context.prisma.updateProfile({
     where: {
       id: profile.id
     },
     data: {
-      storiesLiked: { delete: { id: like.id } }
+      storiesLiked: { delete: { id: likeToRemove.id } }
     }
   }).$fragment(profileFragment)
 }
