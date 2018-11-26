@@ -30,6 +30,7 @@ type Mutation {
     addLikedStory(storyId: ID!): Profile
     removeLikedStory(storyId: ID!): Profile
     setCommunityToProfile(id: ID!, communityId: ID!): Profile
+    removeCommunityFromProfile(id: ID!, communityId: ID!): Profile
 }
 
 input OrganizationInput {

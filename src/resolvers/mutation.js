@@ -274,7 +274,27 @@ setCommunityToProfile = async (_, args, context, info) => {
       }
     }).$fragment(profileFragment)
   }
-  // add profile fragment
+}
+
+removeCommunityFromProfile = async (_, args, context, info) => {
+  const payload = verifyToken(context);
+  const profile = await context.prisma.profile({ id: args.id })
+
+  if(profile.communitiesIds !== undefined) {
+    let updatedList = profile.communitiesIds
+    updatedList = updatedList.filter(member => member !== args.communityId)
+
+    return await context.prisma.updateProfile({
+      where: {
+        id: args.id
+      },
+      data: {
+        communitiesIds: {
+          set: updatedList
+        }
+      }
+    }).$fragment(profileFragment)
+  }
 }
 
 module.exports = {
