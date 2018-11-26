@@ -314,5 +314,6 @@ module.exports = {
     updateFlaggedCount,
     addLikedStory,
     removeLikedStory,
-    setCommunityToProfile
+    setCommunityToProfile,
+    removeCommunityFromProfile
 }
