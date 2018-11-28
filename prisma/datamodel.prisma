@@ -1,3 +1,6 @@
+# Author: Austin Howlett
+# Description: Database models
+
 type Profile {
   id: ID! @unique
   account_id: ID @unique

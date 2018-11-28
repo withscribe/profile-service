@@ -1,3 +1,6 @@
+// Author: Austin Howlett
+// Description: Fragments ensure that, if requested, all of these fields will be returned
+
 const profileFragment = `
   fragment profileFragment on Profile {
     id
