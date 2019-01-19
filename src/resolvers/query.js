@@ -1,12 +1,10 @@
-// Author: Austin Howlett
-// Description: Responsible for resolving all query (in relation to REST this would GET endpoints) schema endpoints (business logic)
-
 const { verifyToken } = require('../utils');
 const { profileFragment } = require("../fragments/ProfileFragment");
 const { organizationFragment } = require("../fragments/OrganizationFragment");
 
+// TODO: Review permissions on profileById and communitiesMembers
 profileById = async (_, args, context, info) => {
-  const payload = verifyToken(context);
+  // const payload = verifyToken(context);
   return profile = await context.prisma.profile({ id: args.id }).$fragment(profileFragment)
 }
 
@@ -61,7 +59,7 @@ searchOrganizations = async (_, args, context, info) => {
 }
 
 allProfiles = async(_, args, context, info) => {
-  const payload = verifyToken(context);
+  // const payload = verifyToken(context);
   return await context.prisma.profiles({}).$fragment(profileFragment)
 }
 
@@ -75,7 +73,7 @@ userNameExists = async (_, args, context, info) => {
 }
 
 communitiesMembers = async (_, args, context, info) => {
-  const payload = verifyToken(context);
+  //const payload = verifyToken(context);
   return await context.prisma.profiles({where: { id_in: args.membersIds }}).$fragment(profileFragment)
 }
 
