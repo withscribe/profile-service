@@ -1,46 +1,42 @@
-# Author: Austin Howlett, Gerhard Knelsen
-# Description: GraphQL Schema - endpoints used in http calls (API definition)
-
 type Query {
-    searchProfiles(searchString: String!): [Profile!]!
-    allProfiles: [Profile!]!
-    profileById(id: ID!): Profile
-    profileByAccountId(accountId: ID!): Profile
-    profileByUsername(userName: String!): [Profile!]!
-    allOrganizations: [Organization!]!
-    searchOrganizations(searchString: String!): [Organization!]!
-    orgById(id: ID!): Organization
-    userNameExists(userName: String!): Profile
-    communitiesMembers(membersIds: [ID!]): [Profile!]!
-
+  searchProfiles(searchString: String!): [Profile!]!
+  allProfiles: [Profile!]!
+  profileById(id: ID!): Profile
+  profileByAccountId(accountId: ID!): Profile
+  profileByUsername(userName: String!): [Profile!]!
+  allOrganizations: [Organization!]!
+  searchOrganizations(searchString: String!): [Organization!]!
+  orgById(id: ID!): Organization
+  userNameExists(userName: String!): Profile
+  communitiesMembers(membersIds: [ID!]): [Profile!]!
 }
 
 type Mutation {
-    updateProfileConnect(userName: String, firstName: String, lastName: String, dob: String, occupation: String, employerId: ID): Profile
-    registerProfile(accountId: ID! userName: String!): Profile
-    createProfile(accountId: ID, userName: String!, firstName: String, lastName: String, dob: String, occupation: String, employer: OrganizationInput): Profile
-    updateProfileCreate(userName: String, firstName: String, lastName: String, dob: String, occupation: String, employer: OrganizationInput): Profile
-    removeProfile(id: ID, userName: String): Profile
-    createOrganization(orgName: String!, address: String!, country: String!, orgType: String!): Organization
-    updateOrganization(orgId: ID!, orgName: String, address: String, country: String, orgType: String): Organization
-    removeOrganization(id: ID!): Organization
-    addNewEmployerToProfile(employer: OrganizationInput): Profile
-    addEmployerToProfile(employerId: ID!): Profile
-    addStoriesToProfile(storyIds: [ID!]!): Profile
-    updateFlaggedCount(profileId: ID!): Profile
-    updatePublishedCount(profileId: ID!): Profile
-    updateReviewedCount(profileId: ID!): Profile
-    addLikedStory(storyId: ID!): Profile
-    removeLikedStory(storyId: ID!): Profile
-    setCommunityToProfile(id: ID!, communityId: ID!): Profile
-    removeCommunityFromProfile(id: ID!, communityId: ID!): Profile
+  updateProfileConnect(userName: String, firstName: String, lastName: String, dob: String, occupation: String, employerId: ID): Profile
+  registerProfile(accountId: ID! userName: String!): Profile
+  createProfile(accountId: ID, userName: String!, firstName: String, lastName: String, dob: String, occupation: String, employer: OrganizationInput): Profile
+  updateProfileCreate(userName: String, firstName: String, lastName: String, dob: String, occupation: String, employer: OrganizationInput): Profile
+  removeProfile(id: ID, userName: String): Profile
+  createOrganization(orgName: String!, address: String!, country: String!, orgType: String!): Organization
+  updateOrganization(orgId: ID!, orgName: String, address: String, country: String, orgType: String): Organization
+  removeOrganization(id: ID!): Organization
+  addNewEmployerToProfile(employer: OrganizationInput): Profile
+  addEmployerToProfile(employerId: ID!): Profile
+  addStoriesToProfile(storyIds: [ID!]!): Profile
+  updateFlaggedCount(profileId: ID!): Profile
+  updatePublishedCount(profileId: ID!): Profile
+  updateReviewedCount(profileId: ID!): Profile
+  addLikedStory(storyId: ID!): Profile
+  removeLikedStory(storyId: ID!): Profile
+  setCommunityToProfile(id: ID!, communityId: ID!): Profile
+  removeCommunityFromProfile(id: ID!, communityId: ID!): Profile
 }
 
 input OrganizationInput {
-    orgName: String!
-    orgType: String!
-    country: String!
-    address: String!
+  orgName: String!
+  orgType: String!
+  country: String!
+  address: String!
 }
 
 type Profile {
