@@ -1,31 +1,59 @@
-# Author: Austin Howlett
-# Description: Database models
-
 type Profile {
-  id: ID! @unique
-  account_id: ID @unique
-  userName: String @unique
-  firstName: String
-  lastName: String
-  dateOfBirth: String
+  id:               ID! @unique
+  createdAt:        DateTime!
+  updateAt:         DateTime!
+
+  account_id:       ID @unique
+  userName:         String @unique
+  firstName:        String
+  lastName:         String
+  dateOfBirth:      String
   storiesPublished: Int @default(value: 0)
-  storiesReviewed: Int @default(value: 0)
-  flaggedStories: Int @default(value: 0)
-  occupation: String @default(value: "N/A")
-  employer: Organization
-  storiesLiked: [Likes!]!
-  communitiesIds: [ID!]!
+  storiesReviewed:  Int @default(value: 0)
+  flaggedStories:   Int @default(value: 0)
+  occupation:       String @default(value: "N/A")
+  employer:         Organization
+  storiesLiked:     [Likes!]!
+  communitiesIds:   [ID!]!
 }
 
 type Likes {
-  id: ID! @unique
-  guid: String @unique
+  id:         ID! @unique
+  createdAt:  DateTime!
+  updateAt:   DateTime!
+
+  guid:       String @unique
 }
 
 type Organization {
-  id: ID! @unique
-  orgName: String!
-  address: String!
-  country: String!
-  orgType: String!
+  id:         ID! @unique
+  createdAt:  DateTime!
+  updateAt:   DateTime!
+
+  orgName:    String!
+  address:    String!
+  country:    String!
+  orgType:    String!
+}
+
+type LogError {
+  id:			    ID! @unique
+  createdAt:	DateTime!
+  updatedAt:	DateTime!
+
+  args:			  Json
+  error:		  String!
+  LogSession:	LogSession! @relation(name: "LogErrorSession", onDelete: SET_NULL)
+}
+
+type LogSession {
+  id:			    ID! @unique
+  createdAt:	DateTime!
+  updatedAt:	DateTime!
+
+  args:			  Json
+  ipAddress:	String
+  LogError:		LogError @relation(name: "LogErrorSession", onDelete: CASCADE)
+  origin:		  String!
+  resolver:		String!
 }
