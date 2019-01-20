@@ -1,12 +1,8 @@
-// Author: Austin Howlett
-// Description: Responsible for resolving all mutation (in realtion to REST this would be POST,PUT,PATCH,DELETE) schema endpoints (business logic)
-
 const { verifyToken } = require('../utils');
 const { profileFragment } = require("../fragments/ProfileFragment");
 const { organizationFragment } = require("../fragments/OrganizationFragment");
 
 createProfile = async (_, args, context, info) => {
-  const payload = verifyToken(context);
   return await context.prisma.createProfile({
     account_id: args.accountId,
     firstName: args.firstName,
@@ -31,6 +27,7 @@ registerProfile = async (_, args, context, info) => {
   }).$fragment(profileFragment)
 }
 
+// TODO: remove payload and get accountId from args
 updateProfileCreate = async (_, args, context, info) => {
   const payload = verifyToken(context)
 
@@ -59,6 +56,7 @@ updateProfileCreate = async (_, args, context, info) => {
   }).$fragment(profileFragment)
 }
 
+// TODO: remove payload and get accountId from args
 updateProfileConnect = async (_, args, context, info) => {
   const payload = verifyToken(context)
   return await context.prisma.updateProfile({
@@ -81,12 +79,10 @@ updateProfileConnect = async (_, args, context, info) => {
 }
 
 removeProfile = async (_, args, context, info) => {
-  const payload = verifyToken(context);
   return await context.prisma.deleteProfile({ id: args.id }).$fragment(profileFragment)
 }
 
 createOrganization = async (_, args, context, info) => {
-  const payload = verifyToken(context);
   return await context.prisma.createOrganization({
     orgName: args.orgName,
     address: args.address,
@@ -96,7 +92,6 @@ createOrganization = async (_, args, context, info) => {
 }
 
 updateOrganization = async (_, args, context, info) => {
-  const payload = verifyToken(context)
   return await context.prisma.createOrganization({
     where: {
       id: args.orgId
@@ -111,10 +106,10 @@ updateOrganization = async (_, args, context, info) => {
 }
 
 removeOrganization = async (_, args, context, info) => {
-  const payload = verifyToken(context);
   return await context.prisma.deleteOrganization({ id: args.id }).$fragment(organizationFragment)
 }
 
+// TODO: remove payload and get accountId from args
 addNewEmployerToProfile = async (_, args, context, info) => {
   const payload = verifyToken(context);
   return await context.prisma.updateProfile({
@@ -134,6 +129,8 @@ addNewEmployerToProfile = async (_, args, context, info) => {
   }).$fragment(profileFragment)
 }
 
+
+// TODO: remove payload and get accountId from args
 addEmployerToProfile = async (_, args, context, info) => {
   const payload = verifyToken(context);
   return await context.prisma.updateProfile({
@@ -151,7 +148,6 @@ addEmployerToProfile = async (_, args, context, info) => {
 }
 
 addStoriesToProfile = async (_, args, context, info) => {
-  const payload = verifyToken(context);
   return await context.prisma.updateProfile({
     where: {
       account_id: accountId
@@ -167,7 +163,6 @@ addStoriesToProfile = async (_, args, context, info) => {
 }
 
 updateFlaggedCount = async (_, args, context, info) => {
-  const payload = verifyToken(context);
   const profile = await context.prisma.profile({ id: args.profileId })
 
   profile.flaggedStories = profile.flaggedStories + 1;
@@ -183,7 +178,6 @@ updateFlaggedCount = async (_, args, context, info) => {
 }
 
 updatePublishedCount = async (_, args, context, info) => {
-  const payload = verifyToken(context);
   const profile = await context.prisma.profile({ id: args.profileId })
 
   profile.storiesPublished = profile.storiesPublished + 1;
@@ -199,7 +193,6 @@ updatePublishedCount = async (_, args, context, info) => {
 }
 
 updateReviewedCount = async (_, args, context, info) => {
-  const payload = verifyToken(context);
   const profile = await context.prisma.profile({ id: args.profileId })
 
   profile.storiesReviewed = profile.storiesReviewed + 1;
@@ -231,8 +224,6 @@ addLikedStory = async (_, args, context, info) => {
 }
 
 removeLikedStory = async (_, args, context, info) => {
-  const payload = verifyToken(context);
-
   const profile = await context.prisma.profile({ account_id: payload.accountId })
   const guid = args.storyId + profile.id
   const likeToRemove = await context.prisma.likes({ guid: guid })
@@ -248,7 +239,6 @@ removeLikedStory = async (_, args, context, info) => {
 }
 
 setCommunityToProfile = async (_, args, context, info) => {
-  const payload = verifyToken(context);
   const profile = await context.prisma.profile({ id: args.id })
 
   if(profile.communitiesIds !== undefined) {
@@ -280,7 +270,6 @@ setCommunityToProfile = async (_, args, context, info) => {
 }
 
 removeCommunityFromProfile = async (_, args, context, info) => {
-  const payload = verifyToken(context);
   const profile = await context.prisma.profile({ id: args.id })
 
   if(profile.communitiesIds !== undefined) {
@@ -301,22 +290,22 @@ removeCommunityFromProfile = async (_, args, context, info) => {
 }
 
 module.exports = {
-    addStoriesToProfile,
-    addEmployerToProfile,
-    addNewEmployerToProfile,
-    removeProfile,
-    createOrganization,
-    updateOrganization,
-    removeOrganization,
-    updateProfileCreate,
-    updateProfileConnect,
-    createProfile,
-    registerProfile,
-    updateReviewedCount,
-    updatePublishedCount,
-    updateFlaggedCount,
-    addLikedStory,
-    removeLikedStory,
-    setCommunityToProfile,
-    removeCommunityFromProfile
+  addStoriesToProfile,
+  addEmployerToProfile,
+  addNewEmployerToProfile,
+  removeProfile,
+  createOrganization,
+  updateOrganization,
+  removeOrganization,
+  updateProfileCreate,
+  updateProfileConnect,
+  createProfile,
+  registerProfile,
+  updateReviewedCount,
+  updatePublishedCount,
+  updateFlaggedCount,
+  addLikedStory,
+  removeLikedStory,
+  setCommunityToProfile,
+  removeCommunityFromProfile
 }
