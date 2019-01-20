@@ -27,8 +27,6 @@ type Likes {
 
 type Organization {
   id:         ID! @unique
-  createdAt:  DateTime!
-  updateAt:   DateTime!
 
   orgName:    String!
   address:    String!
@@ -38,8 +36,6 @@ type Organization {
 
 type LogError {
   id:			    ID! @unique
-  createdAt:	DateTime!
-  updatedAt:	DateTime!
 
   args:			  Json
   error:		  String!
