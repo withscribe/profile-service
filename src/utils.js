@@ -1,7 +1,5 @@
-// Author: Austin Howlett
-// Description: Verifies the access token
-
 const jwt = require('jsonwebtoken')
+const { AuthError } = require('./errorHandling/customerrors')
 
 function verifyToken(context) {
   const Authorization = context.request.get('Authorization')
@@ -11,13 +9,7 @@ function verifyToken(context) {
     return payload
   }
 
-  throw new AuthError()
-}
-
-class AuthError extends Error {
-  constructor() {
-    super('Not Authorized')
-  }
+  throw new AuthError("401 User Not Authorized.", context)
 }
 
 module.exports = {
