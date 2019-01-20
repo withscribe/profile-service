@@ -2,19 +2,15 @@ const { verifyToken } = require('../utils');
 const { profileFragment } = require("../fragments/ProfileFragment");
 const { organizationFragment } = require("../fragments/OrganizationFragment");
 
-// TODO: Review permissions on profileById and communitiesMembers
 profileById = async (_, args, context, info) => {
-  // const payload = verifyToken(context);
   return profile = await context.prisma.profile({ id: args.id }).$fragment(profileFragment)
 }
 
 profileByAccountId = async (_, args, context, info) => {
-  const payload = verifyToken(context);
   return await context.prisma.profile({ account_id: args.accountId }).$fragment(profileFragment)
 }
 
 profileByUsername = async (_, args, context, info) => {
-  const payload = verifyToken(context);
   return await context.prisma.profiles({
     where: {
       OR: [
@@ -25,12 +21,10 @@ profileByUsername = async (_, args, context, info) => {
 }
 
 orgById = async (_, args, context, info) => {
-  const payload = verifyToken(context);
   return await context.prisma.organization({ id: args.id }).$fragment(organizationFragment)
 }
 
 searchProfiles = async (_, args, context, info) => {
-  const payload = verifyToken(context);
   return context.prisma.profiles({
     where: {
       OR: [
@@ -45,7 +39,6 @@ searchProfiles = async (_, args, context, info) => {
 }
 
 searchOrganizations = async (_, args, context, info) => {
-  const payload = verifyToken(context);
   return await context.prisma.organizations({
     where: {
       OR: [
@@ -59,12 +52,10 @@ searchOrganizations = async (_, args, context, info) => {
 }
 
 allProfiles = async(_, args, context, info) => {
-  // const payload = verifyToken(context);
   return await context.prisma.profiles({}).$fragment(profileFragment)
 }
 
 allOrganizations = async (_, args, context, info) => {
-  const payload = verifyToken(context);
   return await context.prisma.organizations({}).$fragment(organizationFragment)
 }
 
@@ -73,7 +64,6 @@ userNameExists = async (_, args, context, info) => {
 }
 
 communitiesMembers = async (_, args, context, info) => {
-  //const payload = verifyToken(context);
   return await context.prisma.profiles({where: { id_in: args.membersIds }}).$fragment(profileFragment)
 }
 
