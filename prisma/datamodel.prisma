@@ -1,7 +1,5 @@
 type Profile {
   id:               ID! @unique
-  createdAt:        DateTime!
-  updateAt:         DateTime!
 
   account_id:       ID @unique
   userName:         String @unique
@@ -19,8 +17,6 @@ type Profile {
 
 type Likes {
   id:         ID! @unique
-  createdAt:  DateTime!
-  updateAt:   DateTime!
 
   guid:       String @unique
 }
@@ -36,6 +32,8 @@ type Organization {
 
 type LogError {
   id:			    ID! @unique
+  createdAt:	DateTime!
+  updatedAt:	DateTime!
 
   args:			  Json
   error:		  String!
