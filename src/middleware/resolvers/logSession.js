@@ -1,10 +1,10 @@
 const logSession = async (resolve, parent, args, context, info) => {
   const session = await context.prisma.createLogSession({
-    args,
+    args: args,
     ipAddress: context.request.headers['IPAddress'],
-    origin: context.request.headers.origin
-      ? context.request.headers.origin
-      : context.request.headers.referer,
+    origin: context.request.headers['Origin']
+      ? context.request.headers['Origin']
+      : "no origin (temp msg)",
     resolver: info.fieldName
   }, `{ id }`)
   // Important: notice how we’re adding the session ID as a new arg.
