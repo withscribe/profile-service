@@ -24,7 +24,7 @@ const server = new GraphQLServer({
     prisma
   }),
   middlewares: [
-    authMiddleware,
+    // authMiddleware,
     loggingSessionMiddleware,
     errorMiddleware
   ]
